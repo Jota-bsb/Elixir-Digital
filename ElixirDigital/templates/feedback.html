@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}Deixe seu Feedback - ElixirDigital{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Deixe seu Feedback</h1>
+            <p>Sua opinião é fundamental para nós. Compartilhe sua experiência com a ElixirDigital e nos ajude a continuar oferecendo serviços de excelência.</p>
+        </div>
+    </section>
+
+    <!-- Feedback Form Section -->
+    <section class="feedback-form-section">
+        <h2 class="section-title">Compartilhe Sua Experiência</h2>
+        <div class="form-container">
+            <form class="feedback-form" id="feedbackForm" action="/salvar_feedback" method="POST">
+                <div class="form-group">
+                    <label for="name" class="form-label required">Seu Nome</label>
+                    <input type="text" name="name" id="name" class="form-input" placeholder="Digite seu nome completo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label required">Seu E-mail</label>
+                    <input type="email" name="email" id="email" class="form-input" placeholder="seu.email@exemplo.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="project" class="form-label">Projeto Relacionado (Opcional)</label>
+                    <input type="text" name="project" id="project" class="form-input" placeholder="Nome do projeto, se aplicável">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label required">Avaliação Geral</label>
+                    <div class="rating-container">
+                        <div class="rating-stars">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <div class="rating-labels">
+                            <span>Péssimo</span>
+                            <span>Excelente</span>
+                        </div>
+                        <input type="hidden" id="rating" name="rating" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message" class="form-label required">Seu Feedback</label>
+                    <textarea id="message" name="message" class="form-textarea" 
+                              placeholder="Descreva detalhadamente sua experiência, sugestões de melhoria ou elogios..." required></textarea>
+                </div>
+
+            
+                <button type="submit" class="submit-button">Enviar Feedback</button>
+            </form>            
+            
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <h3>Feedback Enviado com Sucesso!</h3>
+                <p>Obrigado por compartilhar sua experiência conosco. Seu feedback é muito importante para continuarmos melhorando nossos serviços.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Existing Feedbacks Section -->
+    <section class="existing-feedbacks">
+        <h2 class="section-title">Feedbacks Recentes</h2>
+        <div class="feedback-grid">
+            {% if feedbacks %}
+                {% for feedback in feedbacks %}
+                <!-- Feedback do Banco de Dados -->
+                <div class="feedback-card">
+                    <p class="feedback-text">{{ feedback.mensagem }}</p>
+                    <div class="feedback-author">
+                        <span class="author-name">{{ feedback.autor }}</span>
+                        <div class="author-rating">
+                            {{ feedback.avaliacao|safe }}
+                        </div>
+                        <span class="feedback-date">{{ feedback.data }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Feedbacks padrão caso não haja no banco -->
+                <div class="feedback-card">
+                    <p class="feedback-text">A equipe da ElixirDigital superou todas as nossas expectativas. Eles entregaram um produto de alta qualidade dentro do prazo e orçamento estabelecidos. Recomendo fortemente seus serviços.</p>
+                    <div class="feedback-author">
+                        <span class="author-name">Roberto Almeida</span>
+                        <div class="author-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feedback-card">
+                    <p class="feedback-text">Trabalhar com a ElixirDigital foi uma experiência incrível. Eles são profissionais altamente qualificados que entendem as necessidades do cliente e entregam soluções inovadoras.</p>
+                    <div class="feedback-author">
+                        <span class="author-name">Ana Costa</span>
+                        <div class="author-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feedback-card">
+                    <p class="feedback-text">O projeto foi desenvolvido com maestria. A comunicação foi clara em todas as etapas e o resultado final foi exatamente o que precisávamos. Certamente trabalharemos novamente.</p>
+                    <div class="feedback-author">
+                        <span class="author-name">Fernando Lima</span>
+                        <div class="author-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

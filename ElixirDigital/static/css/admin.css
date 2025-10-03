@@ -1,0 +1,327 @@
+/* admin.css - Estilos específicos para a página de administração */
+
+.admin-section {
+  padding: 4rem 2rem;
+  background-color: var(--bg-primary);
+  min-height: 100vh;
+}
+
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-title {
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  position: relative;
+}
+
+.admin-title::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  margin: 10px 0;
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.admin-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.admin-button {
+  padding: 10px 20px;
+  background: transparent;
+  color: var(--accent-primary);
+  text-decoration: none;
+  border: 1px solid var(--accent-primary);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-button:hover {
+  background-color: var(--accent-primary);
+  color: white;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.admin-button.primary {
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  color: white;
+}
+
+.admin-button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--accent-glow);
+}
+
+.requests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.request-card {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.request-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px var(--accent-glow);
+}
+
+.request-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+}
+
+.request-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.request-company {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.request-date {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.request-id {
+  background-color: var(--bg-tertiary);
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.request-details {
+  margin-bottom: 1.5rem;
+}
+
+.request-field {
+  margin-bottom: 0.8rem;
+}
+
+.field-label {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.field-value {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.request-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 0.5rem;
+}
+
+.tech-tag {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  border: 1px solid var(--border-color);
+}
+
+/* Estilos para o status atual */
+.current-status {
+  margin-top: 0.5rem;
+}
+
+.status-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-block;
+}
+
+.status-em_análise {
+  background-color: #FFA000;
+  color: white;
+}
+
+.status-em_produção {
+  background-color: #2196F3;
+  color: white;
+}
+
+.status-finalizado {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.status-não_aceito {
+  background-color: #f44336;
+  color: white;
+}
+
+.status-controls {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.status-selector {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.status-option {
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.status-option:hover {
+  transform: scale(1.05);
+}
+
+.status-in-production {
+  background-color: #2196F3;
+  color: white;
+}
+
+.status-completed {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.status-rejected {
+  background-color: #f44336;
+  color: white;
+}
+
+.status-option.active {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px var(--accent-glow);
+}
+
+.stat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.no-requests, .loading-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .requests-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .status-selector {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-section {
+    padding: 2rem 1rem; 
+  }
+  
+  .admin-title {
+    font-size: 2rem;
+  }
+  
+  .request-card {
+    padding: 1rem;
+  }
+}

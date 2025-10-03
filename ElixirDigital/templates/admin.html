@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Elixir Digital</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <section class="admin-section">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1 class="admin-title">Painel Administrativo</h1>
+                <div class="admin-actions">
+                    <button id="refresh-btn" class="admin-button">Atualizar</button>
+                    <a href="{{ url_for('index') }}" class="admin-button">Voltar ao Site</a>
+                </div>
+            </div>
+
+            <!-- Estatísticas -->
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="total-requests">{{ total_requests }}</div>
+                    <div class="stat-label">Total de Solicitações</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="in-production-requests">{{ in_production_requests }}</div>
+                    <div class="stat-label">Em Produção</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="completed-requests">{{ completed_requests }}</div>
+                    <div class="stat-label">Finalizado</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="rejected-requests">{{ rejected_requests }}</div>
+                    <div class="stat-label">Não Aceitos</div>
+                </div>
+            </div>
+
+            <!-- Lista de Solicitações -->
+            <div id="requests-container" class="requests-grid">
+                {% if requests %}
+                    {% for request in requests %}
+                    <div class="request-card" data-request-id="{{ request.id }}">
+                        <div class="request-header">
+                            <div>
+                                <div class="request-company">{{ request.company }}</div>
+                                <div class="request-date">Recebido em: {{ request.formatted_date }}</div>
+                            </div>
+                            <div class="request-id">#{{ request.id }}</div>
+                        </div>
+
+                        <div class="request-details">
+                            <div class="request-field">
+                                <span class="field-label">Email:</span>
+                                <span class="field-value">{{ request.email }}</span>
+                            </div>
+                            <div class="request-field">
+                                <span class="field-label">Telefone:</span>
+                                <span class="field-value">{{ request.phone or 'Não informado' }}</span>
+                            </div>
+                            <div class="request-field">
+                                <span class="field-label">Descrição:</span>
+                                <div class="field-value">{{ request.description or 'Sem descrição' }}</div>
+                            </div>
+                            <div class="request-field">
+                                <span class="field-label">Tecnologias:</span>
+                                <div class="request-technologies">
+                                    {% if request.technologies %}
+                                        {% for tech in request.technologies %}
+                                            <span class="tech-tag">{{ tech }}</span>
+                                        {% endfor %}
+                                    {% else %}
+                                        <span class="tech-tag">Não especificadas</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <!-- Status atual do pedido -->
+                            <div class="request-field">
+                                <span class="field-label">Status Atual:</span>
+                                <div class="current-status">
+                                    <span class="status-badge status-{{ request.status }}">
+                                        {{ request.status_display }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="status-controls">
+                            <div class="status-selector">
+                                <div class="status-option status-in-production {% if request.status == 'em_produção' %}active{% endif %}" 
+                                     data-status="in_production" data-request-id="{{ request.id }}">
+                                    Em Produção
+                                </div>
+                                <div class="status-option status-completed {% if request.status == 'finalizado' %}active{% endif %}" 
+                                     data-status="completed" data-request-id="{{ request.id }}">
+                                    Finalizar
+                                </div>
+                                <div class="status-option status-rejected {% if request.status == 'não_aceito' %}active{% endif %}" 
+                                     data-status="rejected" data-request-id="{{ request.id }}">
+                                    Não Aceito
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-requests">
+                        <h3>Nenhuma solicitação encontrada</h3>
+                        <p>Não há solicitações de projetos no momento.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ElixirDigital{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/variables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animations.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <!-- Header with Logo and Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="ElixirDigital Logo" class="logo">
+            <div class="logo-text">ElixirDigital</div>
+        </div>
+        
+        <div class="header-controls">
+            <div class="theme-toggle-header">
+                <label class="theme-toggle-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="theme-slider">
+                        <i class="fas fa-moon theme-icon-dark"></i>
+                        <i class="fas fa-sun theme-icon-light"></i>
+                    </span>
+                </label>
+            </div>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <nav class="nav-menu">
+            {% block navigation %}
+            <a href="{{url_for('index')}}">Home (Sobre Nós)</a>
+            <a href="{{url_for('forms')}}">Contrate-nos</a>
+            <a href="{{url_for('blog')}}">Blog</a>
+            <a href="{{url_for('feedback')}}">Deixe seu Feedback</a>
+            <a href="{{url_for('acompanhamento')}}">Acompanhe sua solicitação</a>
+            {% endblock %}
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">  
+            <div class="copyright">
+                © 2025 ElixirDigital. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/acompanhamento.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>
